@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  postgres-db-1:
+    image: postgres:12
+    ports:
+      - "5465:5432"
+    volumes:
+      - ./init1.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: rootuser1
+      POSTGRES_PASSWORD: rootpassword1
+      POSTGRES_DB: databasename1
+  postgres-db-2:
+    image: postgres:12
+    ports:
+      - "5466:5432"
+    volumes:
+      - ./init2.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: rootuser2
+      POSTGRES_PASSWORD: rootpassword2
+      POSTGRES_DB: databasename2
+  node-database-checker:
+    build: .
+    image: luke/node-database-checker:latest
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres-db-1
+      - postgres-db-2

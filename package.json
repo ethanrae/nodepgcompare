@@ -1,0 +1,9 @@
+{
+  "name": "luke",
+  "version": "1.0.0",
+  "description": "Postgres database data checker.",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^8.0.3"
+  }
+}
